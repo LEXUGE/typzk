@@ -1,0 +1,13 @@
+[package]
+name = "zkgraph"
+version = "0.1.0"
+compiler = "0.11.1"
+repository = "https://github.com/LEXUGE/typzk"
+entrypoint = "lib.typ"
+authors = [
+  "Kanyang Ying <https://github.com/LEXUGE>",
+]
+categories = [ "model" ]
+license = "MIT"
+description = "Typst-based Zettelkasten Solution"
+exclude = [ "/gallery/*", "manual.pdf", "manual.typ" ]
