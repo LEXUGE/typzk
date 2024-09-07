@@ -38,8 +38,8 @@
 }
 
 // TODO: Allow setting extra options
-#let node(identity, desc: none, links: (), back_links: (), body) = {
-  let prefixed_identity = "node_" + identity
+#let node(identity, prefix: "node_", desc: none, links: (), back_links: (), body) = {
+  let prefixed_identity = prefix + identity
   let edges = ()
   for dst in links {
     edges.push(identity + "->" + dst)
@@ -63,8 +63,8 @@
 }
 
 // TODO: Allow setting extra options
-#let subgraph(identity, desc: none, body) = {
-  let prefixed_identity = "cluster_" + identity
+#let subgraph(identity, desc: none, prefix: "cluster_", body) = {
+  let prefixed_identity = prefix + identity
   digraphState.update(state => {
     state.hierarchy.push(prefixed_identity);
     if type(desc) == content {
@@ -77,9 +77,40 @@
   // This seems to work: link to the first element of the body
   [#body #label(prefixed_identity)]
   digraphState.update(state => {
-    // NOTE: Weird behavior, why would colon not discard the result?
-    let _ = state.hierarchy.pop();
-    state
+    state.hierarchy.pop();
+    return state
+  })
+}
+
+#let heading_to_label(prefix: "cluster_") = {
+  let prefixed_identity = prefix
+  let lvls = counter(heading).get()
+  for x in lvls {
+    prefixed_identity += str(x) + "_"
+  }
+  return prefixed_identity
+}
+
+// Create subgraph using heading
+// NOTE: Seems like state update call must be wrapped in a content block, otherwise it will not take effect.
+#let heading_subgraph(args, prefix: "cluster_") = {
+  let desc = args.body
+  let prefixed_identity = heading_to_label(prefix: prefix)
+  let lvls = counter(heading).get()
+  digraphState.update(state => {
+    assert(lvls.len() - state.hierarchy.len() <= 1, message: "heading levels must only increment by 1 at maximum");
+    while lvls.len() <= state.hierarchy.len() {
+       state.hierarchy.pop();
+    }
+    if lvls.len() > state.hierarchy.len() {
+      state.hierarchy.push(prefixed_identity);
+    }
+    if type(desc) == content {
+      let new_desc = (:)
+      new_desc.insert(prefixed_identity, [#link(label(prefixed_identity), desc)])
+      state.clusters = deep-merge(state.clusters, new_desc)
+    }
+    return state
   })
 }
 

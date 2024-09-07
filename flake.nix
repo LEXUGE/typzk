@@ -52,6 +52,13 @@
             version = "git";
             pname = "zkgraph-manual";
           });
+          manual-thm = (buildTypstDoc {
+            inherit pkgs;
+            src = ./.;
+            path = "./manual-thm.typ";
+            version = "git";
+            pname = "zkgraph-manual-thm";
+          });
         };
 
         checks = {
