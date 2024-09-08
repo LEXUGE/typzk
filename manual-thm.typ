@@ -67,7 +67,10 @@ The thmbox can also be easily referenced just as normal: @prob_current,
 
 #pagebreak()
 
-#context state.final()
+= Internal State
+
+The `digraphState` state variable has the value:
+#context digraphState.final()
 
 = Graph Generation Code
 The above graph is realized by

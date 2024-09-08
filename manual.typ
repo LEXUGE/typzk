@@ -111,8 +111,8 @@ We can also create graph using a certain subgraph:
 To explore the graphviz code generated and internal state, insert metadata with
 ```typst
 #context [
-  #metadata(gen_graphviz(state.final().graph)) <graphviz_code>
-  #metadata(state.final()) <internal_state>
+  #metadata(gen_graphviz(digraphState.final().graph)) <graphviz_code>
+  #metadata(digraphState.final()) <internal_state>
 ]
 ```
 and run
@@ -237,6 +237,6 @@ and similarly for internal state
 ```
 
 #context [
-  #metadata(gen_graphviz(state.final().graph)) <graphviz_code>
-  #metadata(state.final()) <internal_state>
+  #metadata(gen_graphviz(digraphState.final().graph)) <graphviz_code>
+  #metadata(digraphState.final()) <internal_state>
 ]

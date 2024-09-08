@@ -1,6 +1,6 @@
 #import "@preview/diagraph:0.2.5"
 
-#let digraphState = state("state", (graph: (:), hierarchy: (), labels: (:), clusters: (:)))
+#let digraphState = state("typzk_digraphState", (graph: (:), hierarchy: (), labels: (:), clusters: (:)))
 
 #let deep-merge-pair(dict1, dict2) = {
     let final = dict1
