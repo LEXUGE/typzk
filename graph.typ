@@ -15,7 +15,7 @@
             final.insert(k, v)
         }
     }
-    final
+    return final
 }
 
 #let deep-merge(..args) = {
@@ -23,7 +23,7 @@
     for dict in args.pos() {
         final = deep-merge-pair(final, dict)
     }
-    final
+    return final
 }
 
 #let node_descend(hierarchy, identity, payload) = {
@@ -34,7 +34,7 @@
   } else {
     graph.insert(identity, payload)
   }
-  graph
+  return graph
 }
 
 // TODO: Allow setting extra options
@@ -57,7 +57,7 @@
     let new_label = (:)
     new_label.insert(identity, linked_desc)
     state.labels = deep-merge(state.labels, new_label)
-    state
+    return state
   })
   [#body #label(prefixed_identity)]
 }
@@ -72,7 +72,7 @@
       new_desc.insert(prefixed_identity, [#link(label(prefixed_identity), desc)])
       state.clusters = deep-merge(state.clusters, new_desc)
     }
-    state
+    return state
   })
   // This seems to work: link to the first element of the body
   [#body #label(prefixed_identity)]
@@ -133,7 +133,7 @@
       e += v
     }
   }
-  (s, e)
+  return (s, e)
 }
 
 // Generate the final graphviz code
@@ -152,7 +152,7 @@
   s += nodes
   s += if edges.len()!=0 { edges.join(";") + ";" }
   s += "}"
-  s
+  return s
 }
 
 // Use path to indicate the subgraph to render
@@ -161,5 +161,5 @@
 
   let s = gen_graphviz(state.graph, extra: extra, path: path)
 
-  diagraph.render(s, labels: state.labels, clusters: state.clusters)
+  return diagraph.render(s, labels: state.labels, clusters: state.clusters)
 }
