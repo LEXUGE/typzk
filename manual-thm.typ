@@ -1,6 +1,6 @@
 #import "@typzk/zkgraph:0.1.0": *
 #import "@preview/physica:0.9.2": *
-#import "@preview/ctheorems:1.1.2": *
+#import "@preview/ctheorems:1.1.3": *
 
 #let ii = sym.dotless.i
 #let to = sym.arrow.r
