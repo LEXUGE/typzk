@@ -91,6 +91,20 @@
   return prefixed_identity
 }
 
+// NOTE: Can be used with render_graph: `render_graph(path: heading_to_path())`
+#let heading_to_path() = {
+  let lvls = counter(heading).get()
+  let i = 0
+  while i < lvls.len() {
+    let lbl = ""
+    for x in lvls.slice(0, i+1) {
+      lbl += str(x) + "_"
+    }
+    (lbl, )
+    i += 1
+  }
+}
+
 // Create subgraph using heading
 // NOTE: Seems like state update call must be wrapped in a content block, otherwise it will not take effect.
 #let heading_subgraph(args, prefix: "cluster_") = {

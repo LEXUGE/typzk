@@ -36,6 +36,10 @@
 
 = Quantum Mechanics
 == Postulates
+#context figure(
+  render_graph(path: heading_to_path()),
+  caption: [#link(label(heading_to_label()))[Section] Subgraph for generated via `heading_to_path()`, *Note `back_links` will not work in subgraph!*]
+)
 #postl(
   "hilbert_space",
 )[Hilbert Space][The states of quantum mechanical objects live in a Hilbert Space. The dimension
